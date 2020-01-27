@@ -2,6 +2,7 @@ language: minimal
 
 script:
   - git clone https://github.com/ayan-b/okcookies
+  - mv okcookies/okcookies.js .
   - curl -X POST -s --data-urlencode 'input@okcookies.js' https://javascript-minifier.com/raw > okcookies.min.js
 
 after_success:
@@ -9,4 +10,4 @@ after_success:
   - git config user.name "traviscibot"
   - git add okcookies.js okcookies.min.js
   - git commit -m "Sync repo [skip ci]"
-  - git push https://ayan-b:${GITHUB_TOKEN}@github.com/okcookies/okcookies.github.io HEAD:master
+  - git push https://ayan-b:${GITHUB_TOKEN}@github.com/okcookies/okcookies.github.io HEAD:master -f
