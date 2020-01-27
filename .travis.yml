@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - 7
+
+script:
+  - git clone https://github.com/ayan-b/okcookies
+
+after_success:
+  - git config user.email "travis@travis-ci.org"
+  - git config user.name "traviscibot"
+  - git add okcookies.js
+  - git commit -m "Sync repo"
+  - git push https://ayan-b:${GITHUB_TOKEN}@github.com/ayan-b/okcookies.github.io HEAD:master
