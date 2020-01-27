@@ -15,17 +15,15 @@ try {
     <p>This site uses cookies to enhance your browsing experience. By
         using this site you agree to the use of cookies and you acknowledge that you have
         read and understood our terms and conditions and, privacy policy.</a>
-        <button onclick="closeAndAccept()">
-            Close and Accept
-        </button>
+        <button onclick="closeAndAccept()">Close and Accept</button>
     </p>`;
 }
 
-let style = null;
+let customStyle = null;
 try {
-    style = Boolean(currentScript.attributes.style.nodeValue);
+    customStyle = Boolean(currentScript.attributes.customStyle.nodeValue);
 } catch(TypeError) {
-    style = false;
+    customStyle = false;
 }
 
 const css = `
@@ -71,7 +69,7 @@ function checkCookie() {
         let getBody = document.getElementsByTagName('body')[0];
         let appendString = `<div id="okcookies">` + message + `</div>`;
         getBody.innerHTML += appendString;
-        if (style === false) {
+        if (customStyle === false) {
             let okcookiesDiv = document.getElementById("okcookies");
             okcookiesDiv.setAttribute("style", css);
         }
