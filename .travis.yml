@@ -10,4 +10,4 @@ after_success:
   - git config user.name "traviscibot"
   - git add okcookies.js
   - git commit -m "Sync repo"
-  - git push https://ayan-b:${GITHUB_TOKEN}@github.com/ayan-b/okcookies.github.io HEAD:master
+  - git push https://ayan-b:${GITHUB_TOKEN}@github.com/okcookies/okcookies.github.io HEAD:master
