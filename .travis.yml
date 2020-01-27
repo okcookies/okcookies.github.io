@@ -4,10 +4,11 @@ node_js:
 
 script:
   - git clone https://github.com/ayan-b/okcookies
+  - curl -X POST -s --data-urlencode 'input@okcookies.js' https://javascript-minifier.com/raw > okcookies.min.js
 
 after_success:
   - git config user.email "travis@travis-ci.org"
   - git config user.name "traviscibot"
-  - git add okcookies.js
+  - git add okcookies.js okcookies.min.js
   - git commit -m "Sync repo"
   - git push https://ayan-b:${GITHUB_TOKEN}@github.com/okcookies/okcookies.github.io HEAD:master

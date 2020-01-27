@@ -58,9 +58,7 @@ function getCookie() {
     let name = cookieName + "=true";
     let decodedCookie = decodeURIComponent(document.cookie);
     let splittedCookies = decodedCookie.split(';');
-    console.log(splittedCookies);
     if (splittedCookies.includes(name) || splittedCookies.includes(" " + name)) {
-        console.log("cookie found");
         return true;
     } else {
         return false;
