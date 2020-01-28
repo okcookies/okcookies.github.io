@@ -4,40 +4,30 @@ class OkCookies {
     constructor(okCookiesSettings=new Map([[]])) {
         let currentScript = document.currentScript;
 
-        let cookieName = (function() {
-            if (okCookiesSettings.has("cookieName") === false) {
-                try {
-                    return currentScript.attributes.cookieName.nodeValue;
-                }
-                catch (TypeError) {
-                    return window.location.hostname + "-okcookies";
-                }
+        let cookieName = okCookiesSettings.get("cookieName") || (function() {
+            try {
+                return currentScript.attributes.cookieName.nodeValue;
             }
-            else {
-                return okCookiesSettings.get("cookieName")
+            catch (TypeError) {
+                return window.location.hostname + "-okcookies";
             }
         })();
 
-        let customOkCookiesMessage = (function() {
-            if (okCookiesSettings.has("customOkCookiesMessage") === false) {
-                try {
-                    return currentScript.attributes.message.nodeValue;
-                }
-                catch (TypeError) {
-                    return `
-                <p>This site uses cookies to enhance your browsing experience. By
-                    using this site you agree to the use of cookies and you acknowledge that you have
-                    read and understood our terms and conditions and, privacy policy.
-                    <button onclick="closeAndAccept()">Close and Accept</button>
-                </p>`;
-                }
+        let customOkCookiesMessage = okCookiesSettings.get("customOkCookiesMessage") || (function() {
+            try {
+                return currentScript.attributes.customOkCookiesMessage.nodeValue;
             }
-            else {
-                return okCookiesSettings.get("customOkCookiesMessage");
+            catch (TypeError) {
+                return `
+            <p>This site uses cookies to enhance your browsing experience. By
+                using this site you agree to the use of cookies and you acknowledge that you have
+                read and understood our terms and conditions and, privacy policy.
+                <button onclick="closeAndAccept()">Close and Accept</button>
+            </p>`;
             }
         })();
 
-        let customStyle = (function() {
+        let customStyle = okCookiesSettings.get("customStyle") || (function() {
             if (okCookiesSettings.has("customStyle") === false) {
                 try {
                     return Boolean(currentScript.attributes.customStyle.nodeValue);
@@ -45,9 +35,6 @@ class OkCookies {
                 catch (TypeError) {
                     return false;
                 }
-            }
-            else {
-                return okCookiesSettings.get("customStyle");
             }
         })();
 
