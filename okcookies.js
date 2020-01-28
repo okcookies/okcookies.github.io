@@ -88,7 +88,6 @@ let okCookies;
 try {
     okCookiesSettings;
     okCookies = new OkCookies(okCookiesSettings);
-    console.log(okCookiesSettings)
 } catch (ReferenceError) {
     okCookies = new OkCookies();
 }
