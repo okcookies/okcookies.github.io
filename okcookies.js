@@ -1,10 +1,11 @@
 "use strict";
 
 class OkCookies {
-    constructor(okCookiesSettings=new Map([[]])) {
+    constructor(okCookiesSettings={}) {
+        console.log(okCookiesSettings);
         let currentScript = document.currentScript;
 
-        let cookieName = okCookiesSettings.get("cookieName") || (function() {
+        let cookieName = okCookiesSettings.cookieName || (function() {
             try {
                 return currentScript.attributes.cookieName.nodeValue;
             }
@@ -12,8 +13,8 @@ class OkCookies {
                 return window.location.hostname + "-okcookies";
             }
         })();
-
-        let customOkCookiesMessage = okCookiesSettings.get("customOkCookiesMessage") || (function() {
+        console.log(cookieName);
+        let customOkCookiesMessage = okCookiesSettings.customOkCookiesMessage || (function() {
             try {
                 return currentScript.attributes.customOkCookiesMessage.nodeValue;
             }
@@ -27,14 +28,12 @@ class OkCookies {
             }
         })();
 
-        let customStyle = okCookiesSettings.get("customStyle") || (function() {
-            if (okCookiesSettings.has("customStyle") === false) {
-                try {
-                    return Boolean(currentScript.attributes.customStyle.nodeValue);
-                }
-                catch (TypeError) {
-                    return false;
-                }
+        let customStyle = okCookiesSettings.customStyle || (function() {
+            try {
+                return Boolean(currentScript.attributes.customStyle.nodeValue);
+            }
+            catch (TypeError) {
+                return false;
             }
         })();
 
@@ -89,6 +88,7 @@ let okCookies;
 try {
     okCookiesSettings;
     okCookies = new OkCookies(okCookiesSettings);
+    console.log(okCookiesSettings)
 } catch (ReferenceError) {
     okCookies = new OkCookies();
 }
